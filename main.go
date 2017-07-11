@@ -18,8 +18,7 @@ var (
 
 // Custom variables
 var (
-	commands          = [...]string{"*Hello", "*Help", "*Gopherify"}												 // List of commands
-	helpString string = fmt.Sprintf("`Commands:\n%s\n%s\n%s <YOUR MESSAGE>`", commands[0], commands[1], commands[2]) // String to display commands
+	commands []string = []string{"*Hello", "*Help", "*Gopherify"} // Commands
 )
 
 func init() {
@@ -65,17 +64,10 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) { // Messag
 	// The message, split up
 	splitMessage := strings.Split(m.Content, " ")
 
-	// Reply to message '*Hello'
-	if splitMessage[0] == commands[0] {
-		s.ChannelMessageSend(m.ChannelID, "`Henlo, I am Gopher Bot`")
-	}
-	// Reply to message "*Help"
-	if splitMessage[0] == commands[1] {
-		s.ChannelMessageSend(m.ChannelID, helpString)
-	}
-	// Reply to message "*Gopherify"
-	if (splitMessage[0]) == commands[2] {
-		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("`%s`", strings.Repeat("Squeak ", len(splitMessage)-1)))
-	}
+	msgHandler := NewMessageHandler(splitMessage[0], splitMessage, commands) // splitMessage[0] is the command itself
+
+	// Handles basic messages
+	msgHandler.BasicMessages(s, m)
 
 }
+
