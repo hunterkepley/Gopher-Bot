@@ -52,7 +52,7 @@ func (mH MessageHandler) BasicMessages(s *discordgo.Session, m *discordgo.Messag
 
 		s.ChannelMessageSendEmbed(m.ChannelID, &discordgo.MessageEmbed{
 			Title: embedString, 
-			Description: fmt.Sprintf("%d", rolledNumber)})
+			Description: fmt.Sprintf(":game_die::%d", rolledNumber)})
 	}
 }
 
