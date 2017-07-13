@@ -7,10 +7,10 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
-	"strings"
 	"syscall"
 	"math/rand"
 	"time"
+	"strings"
 )
 
 // Variables used for command line parameters
@@ -20,7 +20,7 @@ var (
 
 // Custom variables
 var (
-	commands []string = []string{"*Hello", "*Help", "*Gopherify", "*Gopher"} // Commands
+	commands []string = []string{"*hello", "*help", "*gopherify", "*gopher", "*roll"} // Commands
 	// Pictures of gophers:
 	gophers []string = []string{"http://i.imgur.com/3tw6sII.jpg", 
 	"http://i.imgur.com/wUoSiNI.gif", "http://i.imgur.com/NfqwhN6.gif", 
@@ -34,7 +34,8 @@ var (
 	"https://pics.me.me/i-could-spat-gopher-a-beer-funny-c3-15199885.png",
 	"http://il8.picdn.net/shutterstock/videos/7339471/thumb/1.jpg",
 	"https://s-media-cache-ak0.pinimg.com/236x/81/44/2f/81442fdb4c4e31a8e77a779cbad33b57--funny-things-funny-stuff.jpg",
-	"http://images.gr-assets.com/books/1347514988l/14478480.jpg"}
+	"http://images.gr-assets.com/books/1347514988l/14478480.jpg",
+	"https://giphy.com/gifs/shia-labeouf-12NUbkX6p4xOO4"}
 )
 
 func init() {
@@ -83,7 +84,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) { // Messag
 	// The message, split up
 	splitMessage := strings.Split(m.Content, " ")
 
-	msgHandler := MessageHandler{splitMessage[0], splitMessage, commands} // splitMessage[0] is the command itself
+	msgHandler := MessageHandler{strings.ToLower(splitMessage[0]), splitMessage, commands} // splitMessage[0] is the command itself
 
 	// Handles basic messages
 	msgHandler.BasicMessages(s, m)
