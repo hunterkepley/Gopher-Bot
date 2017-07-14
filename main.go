@@ -33,10 +33,29 @@ var (
 	"http://www.freakingnews.com/pictures/5500/Gopher--5651.jpg", 
 	"https://pics.me.me/i-could-spat-gopher-a-beer-funny-c3-15199885.png",
 	"http://il8.picdn.net/shutterstock/videos/7339471/thumb/1.jpg",
-	"https://s-media-cache-ak0.pinimg.com/236x/81/44/2f/81442fdb4c4e31a8e77a779cbad33b57--funny-things-funny-stuff.jpg",
 	"http://images.gr-assets.com/books/1347514988l/14478480.jpg",
-	"https://giphy.com/gifs/shia-labeouf-12NUbkX6p4xOO4"}
+	"https://s-media-cache-ak0.pinimg.com/originals/19/80/1d/19801dba06ba8c5df1dff8cf64ef785c.jpg",
+	"https://c1.staticflickr.com/3/2913/14753417043_7a92202e6a_b.jpg"}
+
+	helpMsg string = fmt.Sprintf("%s -- Say hello\n%s -- Displays all commands\n%s `YOUR MESSAGE` -- Gopherify's a message\n%s -- Display random gopher.\n%s `# #` -- Roll a random number", 
+		commands[0], commands[1], commands[2], commands[3], commands[4])
+
+	splitMsgLowered []string = []string{}
 )
+
+func makeSplitMessage(s *discordgo.Session, m *discordgo.MessageCreate) []string {
+	// The message, split up
+	splitMessage := strings.Split(m.Content, " ")
+
+	// Makes it not case sensitive
+	splitMessageLowered := make([]string, 0, len(splitMessage))
+
+	for i := 0; i < len(splitMessage); i++ {
+		splitMessageLowered = append(splitMessageLowered, splitMessage[i])
+	}
+
+	return splitMessageLowered
+}
 
 func init() {
 	flag.StringVar(&Token, "t", "", "Bot Token")
@@ -76,19 +95,12 @@ func main() {
 
 func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) { // Message handling
 	// Ignore all messages created by the bot itself
-	// This isn't required in this specific example but if it's a good practice.
 	if m.Author.ID == s.State.User.ID {
 		return
 	}
 
-	// The message, split up
-	splitMessage := strings.Split(m.Content, " ")
+	splitMsgLowered = makeSplitMessage(s, m)
 
-	msgHandler := MessageHandler{strings.ToLower(splitMessage[0]), splitMessage, commands} // splitMessage[0] is the command itself
-
-	// Handles basic messages
-	msgHandler.BasicMessages(s, m)
-
-	// Handles advanced messages
-	msgHandler.AdvancedMessages(s, m, gophers)
+	loadCommands()
+	parseCommand(s, m, splitMsgLowered[0])
 }
