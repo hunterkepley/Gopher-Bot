@@ -94,5 +94,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) { // Messag
 	splitMsgLowered = makeSplitMessage(s, m)
 
 	loadCommands()
-	parseCommand(s, m, splitMsgLowered[0])
+	if len(splitMsgLowered) > 0 {
+		parseCommand(s, m, splitMsgLowered[0])
+	}
 }
