@@ -48,13 +48,16 @@ func bugCommand(s *discordgo.Session, m *discordgo.MessageCreate) {
 		if err != nil {
 			s.ChannelMessageSend(m.ChannelID, "Unable to send bug report, user not found. Please go on the github and make an `issue` about this. Use `*hello` to see the github.")
 		}
-
+		authorChannel, err := s.UserChannelCreate(m.Author.ID)
+		if err != nil {
+			s.ChannelMessageSend(m.ChannelID, "Unable to message user who sent bug report. Please go on the github and make an `issue` about this. Use `*hello` to see the github.")
+		}
 		s.ChannelMessageSendEmbed(channel.ID, &discordgo.MessageEmbed{
 			Title: "Bug Report:",
 			Description: fmt.Sprintf("<@!%s>: %s",
 				m.Author.ID,
 				bugReport)})
-		s.ChannelMessageSend(m.Author.ID, "Sent bug report! Thanks for helping :smile:")
+		s.ChannelMessageSend(authorChannel.ID, "Sent bug report! Thanks for helping :smile:")
 	} else {
 		s.ChannelMessageSendEmbed(m.ChannelID, &discordgo.MessageEmbed{
 			Title: "You need to write a message after `*bug`!"})
