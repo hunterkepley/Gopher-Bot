@@ -9,12 +9,12 @@ import (
 var (
 	commMap = make(map[string]Command)
 
-	hello     = Command{"*hello", "Says hello", helloCommand}
-	help      = Command{"*help", "Displays all commands", helpCommand}
-	gopherify = Command{"*gopherify", "Gopherify's a message", gopherifyCommand}
-	gopher    = Command{"*gopher", "Displays random gopher", gopherCommand}
-	roll      = Command{"*roll", "Rolls a random number from x to x", rollCommand}
-	invite    = Command{"*invite", "Displays invite link", inviteCommand}
+	hello     = Command{"hello", "Says hello, just an introduction, nothing more, nothing less.", helloCommand}
+	help      = Command{"help", "Displays all commands, pretty obvious. Also can display specific information using `*help` and a command after, for example, `*help gopher`.", helpCommand}
+	gopherify = Command{"gopherify", "Gopherify's a message, basically just squeaks at ya.", gopherifyCommand}
+	gopher    = Command{"gopher", "Displays random gopher out of a pretty large selection randomly.", gopherCommand}
+	roll      = Command{"roll", "Rolls a random number from x to x, automatically defaults to 1 - 100 if you mess up or make too large of a number.", rollCommand}
+	invite    = Command{"invite", "Displays invite link to invite to other servers.", inviteCommand}
 )
 
 // Command : Every command is made into a struct to make it simpler to work with and eliminate if statements
@@ -34,8 +34,11 @@ func loadCommands() {
 }
 
 func parseCommand(s *discordgo.Session, m *discordgo.MessageCreate, command string) {
-	if command == strings.ToLower(commMap[command].name) {
-		commMap[command].exec(s, m)
+	if strings.Contains(string(command[0]), "*") {
+		command = string(command[1:])
+		if command == strings.ToLower(commMap[command].name) {
+			commMap[command].exec(s, m)
+		}
 	}
 	return
 }
