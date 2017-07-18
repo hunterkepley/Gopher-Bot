@@ -58,6 +58,8 @@ func main() {
 		return
 	}
 
+	loadCommands()
+
 	// Wait here until CTRL-C or other term signal is received
 	fmt.Println("Bot is now running. Press CTRL-C to stop")
 	sc := make(chan os.Signal, 1)
@@ -76,7 +78,6 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) { // Messag
 
 	splitMsgLowered = makeSplitMessage(s, m)
 
-	loadCommands()
 	if len(splitMsgLowered) > 0 { // Prevented a really rare and weird bug about going out of index.
 		parseCommand(s, m, splitMsgLowered[0]) // Really shouldnt happen since `MessageCreate` is about
 	} // 										messages made on create...
