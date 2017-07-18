@@ -8,7 +8,9 @@ import (
 )
 
 func helloCommand(s *discordgo.Session, m *discordgo.MessageCreate) {
-	s.ChannelMessageSend(m.ChannelID, "`Henlo, I am Gopher Bot, I have random utilities and fun features. My prefix is `*`. Github: https://www.github.com/hunterkepley/Gopher-Bot`. Message `TheVariant#9315` if the bot is down or has a bug!")
+	s.ChannelMessageSendEmbed(m.ChannelID, &discordgo.MessageEmbed{
+		Title:       "`Henlo, I am Gopher Bot, I have random utilities and fun features.`",
+		Description: "My prefix is `*`. Github: https://www.github.com/hunterkepley/Gopher-Bot. Message `TheVariant#9315` if the bot is down and use `*bug` to see how to submit a bug!"})
 }
 
 func helpCommand(s *discordgo.Session, m *discordgo.MessageCreate) {
