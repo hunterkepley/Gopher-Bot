@@ -15,6 +15,7 @@ var (
 	gopher    = Command{"gopher", "Displays random gopher out of a pretty large selection randomly.", gopherCommand}
 	roll      = Command{"roll", "Rolls a random number from x to x, automatically defaults to 1 - 100 if you mess up or make too large of a number.", rollCommand}
 	invite    = Command{"invite", "Displays invite link to invite to other servers.", inviteCommand}
+	bug       = Command{"bug", "How to submit a bug to the creator of Gopher-Bot. [To be made into an automatic message.]", bugCommand}
 )
 
 // Command : Every command is made into a struct to make it simpler to work with and eliminate if statements
@@ -31,11 +32,12 @@ func loadCommands() {
 	commMap[gopher.name] = gopher
 	commMap[roll.name] = roll
 	commMap[invite.name] = invite
+	commMap[bug.name] = bug
 }
 
 func parseCommand(s *discordgo.Session, m *discordgo.MessageCreate, command string) {
-	if strings.Contains(string(command[0]), "*") {
-		command = string(command[1:])
+	if strings.Contains(string(command[0]), "*") { // If the first word of the message starts with `*`:`
+		command = string(command[1:]) // Remove the `*` from the command
 		if command == strings.ToLower(commMap[command].name) {
 			commMap[command].exec(s, m)
 		}

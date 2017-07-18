@@ -38,3 +38,9 @@ func inviteCommand(s *discordgo.Session, m *discordgo.MessageCreate) {
 		Title:       "Invite me!:",
 		Description: "Click this link:\nhttps://discordapp.com/oauth2/authorize?client_id=334056784748609547&scope=bot"})
 }
+
+func bugCommand(s *discordgo.Session, m *discordgo.MessageCreate) {
+	s.ChannelMessageSendEmbed(m.ChannelID, &discordgo.MessageEmbed{
+		Title:       "Send a bug via:",
+		Description: "My github:\thttps://www.github.com/hunterkepley/Gopher-Bot\nMy email:\t`kepley.l.hunter@gmail.com`\nMy Discord Name:\t`TheVariant#9315`"})
+}
