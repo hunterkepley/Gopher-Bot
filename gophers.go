@@ -3,7 +3,7 @@ package main
 // This file just hold a bunch of links to pictures of gophers since I don't want it cluttering other files.
 
 var (
-	gophers = []string{"http://i.imgur.com/3tw6sII.jpg",
+	gophers = []string{"http://i.imgur.com/3tw6sII.jpg", // Gophers!
 		"http://i.imgur.com/wUoSiNI.gif",
 		"http://i.imgur.com/NfqwhN6.gif",
 		"http://i.imgur.com/CBvD4d5.jpg",

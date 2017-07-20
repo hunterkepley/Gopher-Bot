@@ -13,14 +13,14 @@ import (
 	"time"
 )
 
-// Variables used for command line parameters
+// Variables used for command line parameters.
 var (
 	Token string
 )
 
 // Custom variables
 var (
-	helpMsg = fmt.Sprintf("Prefix: `*`\nhello -- Say hello\nhelp -- Displays all commands\nhelp `COMMAND` -- Displays extra help for a certain command\ngopherify `YOUR MESSAGE` -- Gopherify's a message\ngopher -- Display random gopher\nroll `# #` -- Roll a random number\ninvite -- Displays invite link\nbug `BUG INFO` -- Submit a bug to the creator of Gopher Bot")
+	helpMsg = fmt.Sprintf("Prefix: `*`\nhello\nhelp\nhelp `COMMAND`\ngopherify `YOUR MESSAGE`\ngopher\nroll `# #`\ninvite\nbug `BUG INFO`\ngopherRequest `LINK`")
 
 	splitMsgLowered = []string{}
 )

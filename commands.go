@@ -9,13 +9,14 @@ import (
 var (
 	commMap = make(map[string]Command)
 
-	hello     = Command{"hello", "Says hello, just an introduction, nothing more, nothing less.", helloCommand}
-	help      = Command{"help", "Displays all commands, pretty obvious. Also can display specific information using `*help` and a command after, for example, `*help gopher`.", helpCommand}
-	gopherify = Command{"gopherify", "Gopherify's a message, basically just squeaks at ya.", gopherifyCommand}
-	gopher    = Command{"gopher", "Displays random gopher out of a pretty large selection randomly.", gopherCommand}
-	roll      = Command{"roll", "Rolls a random number from x to x, automatically defaults to 1 - 100 if you mess up or make too large of a number.", rollCommand}
-	invite    = Command{"invite", "Displays invite link to invite to other servers.", inviteCommand}
-	bug       = Command{"bug", "Send a bug by typing `*bug This is broken, here's how to reprodruce it` to the creator of Gopher-Bot!", bugCommand}
+	hello         = Command{"hello", "Says hello, just an introduction, nothing more, nothing less.", helloCommand}
+	help          = Command{"help", "Displays all commands, pretty obvious. Also can display specific information using `*help` and a command after, for example, `*help gopher`.", helpCommand}
+	gopherify     = Command{"gopherify", "Gopherify's a message, basically just squeaks at ya.", gopherifyCommand}
+	gopher        = Command{"gopher", "Displays random gopher out of a pretty large selection randomly.", gopherCommand}
+	roll          = Command{"roll", "Rolls a random number from x to x, automatically defaults to 1 - 100 if you mess up or make too large of a number.", rollCommand}
+	invite        = Command{"invite", "Displays invite link to invite to other servers.", inviteCommand}
+	bug           = Command{"bug", "Send a bug by typing `*bug This is broken, here's how to reprodruce it` to the creator of Gopher-Bot!", bugCommand}
+	gopherRequest = Command{"gopherrequest", "Request to add a gopher to the amazing gopher pool! Most likely it will be accepted. Just paste a link after `*gopherRequest`!", gopherRequestCommand}
 )
 
 // Command : Every command is made into a struct to make it simpler to work with and eliminate if statements
@@ -33,6 +34,7 @@ func loadCommands() {
 	commMap[roll.name] = roll
 	commMap[invite.name] = invite
 	commMap[bug.name] = bug
+	commMap[gopherRequest.name] = gopherRequest
 }
 
 func parseCommand(s *discordgo.Session, m *discordgo.MessageCreate, command string) {

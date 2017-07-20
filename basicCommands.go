@@ -32,34 +32,11 @@ func helpCommand(s *discordgo.Session, m *discordgo.MessageCreate) {
 }
 
 func gopherifyCommand(s *discordgo.Session, m *discordgo.MessageCreate) {
-	s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("`%s`", strings.Repeat("Squeak ", len(splitMsgLowered)-1))) // -1 because the command is included.
+	s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("`%s`", strings.Repeat("Squeak ", len(splitMsgLowered)-1))) // -1 because the command is included
 }
 
 func inviteCommand(s *discordgo.Session, m *discordgo.MessageCreate) {
 	s.ChannelMessageSendEmbed(m.ChannelID, &discordgo.MessageEmbed{
 		Title:       "Invite me!:",
 		Description: "Click this link:\nhttps://discordapp.com/oauth2/authorize?client_id=334056784748609547&scope=bot"})
-}
-
-func bugCommand(s *discordgo.Session, m *discordgo.MessageCreate) {
-	if len(splitMsgLowered) > 1 {
-		bugReport := strings.Join(splitMsgLowered[1:], " ")
-		channel, err := s.UserChannelCreate("121105861539135490")
-		if err != nil {
-			s.ChannelMessageSend(m.ChannelID, "Unable to send bug report, user not found. Please go on the github and make an `issue` about this. Use `*hello` to see the github.")
-		}
-		authorChannel, err := s.UserChannelCreate(m.Author.ID)
-		if err != nil {
-			s.ChannelMessageSend(m.ChannelID, "Unable to message user who sent bug report. Please go on the github and make an `issue` about this. Use `*hello` to see the github.")
-		}
-		s.ChannelMessageSendEmbed(channel.ID, &discordgo.MessageEmbed{
-			Title: "Bug Report:",
-			Description: fmt.Sprintf("<@!%s>: %s",
-				m.Author.ID,
-				bugReport)})
-		s.ChannelMessageSend(authorChannel.ID, "Sent bug report! Thanks for helping :smile:")
-	} else {
-		s.ChannelMessageSendEmbed(m.ChannelID, &discordgo.MessageEmbed{
-			Title: "You need to write a message after `*bug`!"})
-	}
 }
