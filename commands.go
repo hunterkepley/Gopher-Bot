@@ -12,7 +12,7 @@ var (
 	hello         = Command{"hello", "Says hello, just an introduction, nothing more, nothing less.", helloCommand}
 	help          = Command{"help", "Displays all commands, pretty obvious. Also can display specific information using `*help` and a command after, for example, `*help gopher`.", helpCommand}
 	gopherify     = Command{"gopherify", "Gopherify's a message, basically just squeaks at ya.", gopherifyCommand}
-	gopher        = Command{"gopher", "Displays random gopher out of a pretty large selection randomly.", gopherCommand}
+	gopher        = Command{"gopher", "Displays random gopher out of a pretty large selection randomly. If you type a known keyword for a certain gopher after, then you will get that specific gopher!", gopherCommand}
 	roll          = Command{"roll", "Rolls a random number from x to x, automatically defaults to 1 - 100 if you mess up or make too large of a number.", rollCommand}
 	invite        = Command{"invite", "Displays invite link to invite to other servers.", inviteCommand}
 	bug           = Command{"bug", "Send a bug by typing `*bug This is broken, here's how to reprodruce it` to the creator of Gopher-Bot!", bugCommand}

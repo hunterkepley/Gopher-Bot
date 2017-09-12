@@ -20,7 +20,7 @@ var (
 
 // Custom variables
 var (
-	helpMsg = fmt.Sprintf("Prefix: `*`\nhello\nhelp\nhelp `COMMAND`\ngopherify `YOUR MESSAGE`\ngopher\nroll `# #`\ninvite\nbug `BUG INFO`\ngopherRequest `LINK`")
+	helpMsg = fmt.Sprintf("Prefix: `*`\nhello\nhelp\nhelp `COMMAND`\ngopherify `YOUR MESSAGE`\ngopher\ngopher `NAME`\nroll `# #`\ninvite\nbug `BUG INFO`\ngopherRequest `LINK`")
 
 	splitMsgLowered = []string{}
 )
@@ -59,6 +59,7 @@ func main() {
 	}
 
 	loadCommands()
+	loadGophers()
 
 	// Wait here until CTRL-C or other term signal is received
 	fmt.Println("Bot is now running. Press CTRL-C to stop")
